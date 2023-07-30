@@ -35,9 +35,12 @@ public class View {
                     // For example, you can display its path or load its contents
                     System.out.println("Selected file: " + selectedFile.getAbsolutePath());
 
-                    // Validate Machine Definition
-                    if(!validateTextFile(selectedFile)) {
-
+                    try{
+                        Machine machine = new Machine(selectedFile);
+//                        System.out.println(machine.toString());
+                    }
+                    catch (Exception ex) {
+                        System.out.println(ex);
                     }
 
                 }
@@ -49,10 +52,6 @@ public class View {
 
         this.mainFrame.setJMenuBar(menuBar);
         this.mainFrame.show();
-    }
-
-    public boolean validateTextFile(File file) {
-        return true;
     }
 }
 

@@ -55,18 +55,18 @@ public class main {
         State currentState = q0;
 
         while(true) {
-            if(currentState.isFinalState()){
-                System.out.print("Accepted");
+            if(currentState.isAcceptState()){
+                System.out.println("Accepted");
                 return;
             }
             else if(currentState.isRejectState()){
-                System.out.print("Rejected");
+                System.out.println("Rejected");
                 return;
             }
             else{
-                System.out.println("Current State: " + currentState.getName());
-                System.out.println("Current Input: " + input.charAt(readHead));
-                System.out.println();
+//                System.out.println("Current State: " + currentState.getName());
+//                System.out.println("Current Input: " + input.charAt(readHead));
+//                System.out.println();
 
                 StateAndSymbolPair transition = currentState.getTransition(input.charAt(readHead));
                 currentState = transition.getState();
