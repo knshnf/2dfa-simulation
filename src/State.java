@@ -2,7 +2,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class State {
     private String name;
     private boolean isAcceptState;
@@ -69,21 +68,7 @@ public class State {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("State Name: ").append(name).append("\n");
-        sb.append("Is Accept State: ").append(isAcceptState).append("\n");
-        sb.append("Is Reject State: ").append(isRejectState).append("\n");
-
-        if (!transitions.isEmpty()) {
-            sb.append("Transitions: ").append("\n");
-            for (Map.Entry<Character, StateAndSymbolPair> entry : transitions.entrySet()) {
-                char inputSymbol = entry.getKey();
-                StateAndSymbolPair nextStatePair = entry.getValue();
-                sb.append("\tInput Symbol: ").append(inputSymbol)
-                        .append(", Next State: ").append(nextStatePair.getState().getName())
-                        .append(", Direction: ").append(nextStatePair.getSymbol()).append("\n");
-            }
-        }
-
+        sb.append("").append(name);
         return sb.toString();
     }
 }
