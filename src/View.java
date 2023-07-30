@@ -7,9 +7,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class View {
     private JFrame mainFrame;
@@ -37,6 +34,7 @@ public class View {
         this.mainFrame.setLayout(null);
         this.mainFrame.setResizable(false);
         this.mainFrame.setSize(500,500);
+        this.mainFrame.setLocationRelativeTo(null);
 
         //Build the menu
         this.menuBar = new JMenuBar();
@@ -288,13 +286,13 @@ public class View {
 
         for (int i = 0; i < inputString.length(); i++) {
             if (i == 0 && index == 0) {
-                formattedString += "<font color='blue'>" + "&#60" + "</font>";
+                formattedString += "<u>" + "&#60" + "</u>";
             }
             else if (i == 0){
                 formattedString +=  "&#60";
             }
             else if (i == index) {
-                formattedString += "<font color='blue'>" + inputString.charAt(i) + "</font>";
+                formattedString += "<u>" + inputString.charAt(i) + "</u>";
             } else {
                 formattedString += inputString.charAt(i);
             }
