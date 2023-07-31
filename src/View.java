@@ -1,5 +1,3 @@
-import org.w3c.dom.Text;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +8,7 @@ import java.util.List;
 
 public class View {
     private JFrame mainFrame;
-    private JTextField textField;
+    //private JTextField textField;
     private JMenuBar menuBar;
     private JMenu menuFile, menuInput;
     private JMenuItem menuItemOpen, menuItemInputStep, menuItemInputFast;
@@ -57,6 +55,7 @@ public class View {
 
                     try{
                         machine = new Machine(selectedFile);
+                        
 //                        System.out.println(machine.toString());
                     }
                     catch (Exception ex) {
@@ -69,7 +68,7 @@ public class View {
         });
 
         this.menuInput = new JMenu("Input");
-
+        this.menuInput.setVisible(false);
 
         this.menuItemInputStep = new JMenuItem("Step with Closure...");
 
@@ -271,7 +270,7 @@ public class View {
 
         this.mainFrame.setTitle("2DFA - " + file.getName());
         this.textArea.setText(machine.toString());
-
+        this.menuInput.setVisible(true);
         this.mainFrame.repaint();
         this.mainFrame.revalidate();
 

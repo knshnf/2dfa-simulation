@@ -3,7 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
+// import java.util.Arrays;
 
 public class Machine {
     List<State> states;
@@ -16,9 +16,7 @@ public class Machine {
 
     public Machine(File file) throws CustomException{
         // Initialize Reader
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             // Read number of states
             int numStates = Integer.parseInt(reader.readLine().trim());
 
