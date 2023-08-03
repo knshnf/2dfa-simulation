@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.util.List;
+import javax.swing.border.Border;
 
 public class View {
     private JFrame mainFrame;
@@ -125,14 +126,17 @@ public class View {
                     JLabel currState = new JLabel("Current State ");
                     currState.setBounds(200, 100, 100, 30);
 
-                    stepCurrState = new JLabel();
-                    stepCurrState.setBounds(200, 130, 100, 30);
+                    stepCurrState = new JLabel("", SwingConstants.CENTER);
+                    stepCurrState.setBounds(0, 130, 477, 30);
 
                     JLabel currInput = new JLabel("Current Input");
                     currInput.setBounds(200, 200, 100, 30);
-                    stepCurrInput = new JLabel();
-                    stepCurrInput.setBounds(200, 230, 500, 30);
+                    stepCurrInput = new JLabel("", SwingConstants.CENTER);
+                    stepCurrInput.setBounds(0, 230, 477, 30);
 
+//                    Border border = BorderFactory.createLineBorder(Color.BLUE, 2); // Blue border with 2-pixel thickness
+//                    stepCurrState.setBorder(border);
+//                    stepCurrInput.setBorder(border);
 
                     newPanel.add(prevBtn);
                     newPanel.add(nextBtn);
@@ -165,6 +169,16 @@ public class View {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             if(stepIndex == stepList.size() - 1) {
+                                if(machine.fastRun(inputText)){
+                                    JOptionPane.showMessageDialog(mainFrame,
+                                            "The input was accepted");
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(mainFrame,
+                                            "The input was rejected");
+                                }
+
+
                                 return;
                             }
 
@@ -189,6 +203,12 @@ public class View {
                         }
                     });
 
+                    int tabCount = tabbedPane.getTabCount();
+
+                    if (tabCount > 1) {
+                        // Remove the second tab (index 1) if there are multiple tabs
+                        tabbedPane.remove(1);
+                    }
 
                     tabbedPane.add("Simulate: " + inputText, newPanel);
                     tabbedPane.setSelectedIndex(1);
