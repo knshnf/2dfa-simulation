@@ -5,11 +5,13 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.util.List;
-import javax.swing.border.Border;
 
+
+/**
+ * The View class is repsonsible for for displaying GUI of the application.
+ */
 public class View {
     private JFrame mainFrame;
-    //private JTextField textField;
     private JMenuBar menuBar;
     private JMenu menuFile, menuInput;
     private JMenuItem menuItemOpen, menuItemInputStep, menuItemInputFast;
@@ -17,17 +19,16 @@ public class View {
     private JScrollPane scrollPane;
     private JLabel stepCurrState, stepCurrInput;
     private JTextArea textArea;
-
     private File file;
-
     private Machine machine;
-
     private int stepIndex;
-
     private List<StateAndIndexPair> stepList;
 
-
+    /**
+     * Creates a new instance of View. This constructor initializes the GUI.
+     */
     public View() {
+        // Initialize JFrame
         this.mainFrame = new JFrame("2DFA");
         this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.mainFrame.setLayout(null);
@@ -70,7 +71,6 @@ public class View {
 
         this.menuInput = new JMenu("Input");
         this.menuInput.setVisible(false);
-
         this.menuItemInputStep = new JMenuItem("Step with Closure...");
 
         this.menuItemInputStep.addActionListener(new ActionListener() {
@@ -79,13 +79,12 @@ public class View {
                 // Create a text field
                 JTextField textField = new JTextField(20);
 
-
                 // Create a panel to hold the text field and label
                 JPanel panel = new JPanel();
                 panel.add(new JLabel("Input"));
                 panel.add(textField);
 
-                // Show the input dialog with "OK" and "Cancel" buttons, and custom title
+                // Show the input dialog prompt for input
                 int result = JOptionPane.showOptionDialog(null,
                         panel,
                         "Input",
@@ -95,22 +94,18 @@ public class View {
                         null,
                         null);
 
-                // Check the result to see if "OK" was clicked
+                // Check the result to see if OK button was clicked
                 if (result == JOptionPane.OK_OPTION) {
                     String inputText = textField.getText();
-
                     StringBuilder sb = new StringBuilder();
                     sb.append("<");
                     sb.append(inputText);
                     sb.append(">");
 
-                    System.out.println(sb);
-
                     stepIndex = 0;
                     stepList = machine.step(inputText);
-                    System.out.print(stepList);
 
-
+                    // Initialize the new tab that will show the current state and current input being read
                     JPanel newPanel = new JPanel(null);
                     newPanel.setBackground(Color.white);
 
@@ -134,10 +129,6 @@ public class View {
                     stepCurrInput = new JLabel("", SwingConstants.CENTER);
                     stepCurrInput.setBounds(0, 230, 477, 30);
 
-//                    Border border = BorderFactory.createLineBorder(Color.BLUE, 2); // Blue border with 2-pixel thickness
-//                    stepCurrState.setBorder(border);
-//                    stepCurrInput.setBorder(border);
-
                     newPanel.add(prevBtn);
                     newPanel.add(nextBtn);
                     newPanel.add(resetBtn);
@@ -150,7 +141,7 @@ public class View {
                     newPanel.add(stepCurrState);
                     newPanel.add(stepCurrInput);
 
-                    // Add actions listener
+                    // Add actions listener to the prev, next, and reset button
                     prevBtn.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -219,7 +210,7 @@ public class View {
             }
         });
 
-
+        // Initialize the menu item and action for fast run option
         this.menuItemInputFast = new JMenuItem("Fast Run...");
 
         this.menuItemInputFast.addActionListener(new ActionListener() {
@@ -285,9 +276,10 @@ public class View {
         this.mainFrame.setVisible(true);
     }
 
+    /**
+     * Displays the machine definition one a valid file is entered
+     */
     public void displayMachineDefinition() {
-//        this.mainFrame.getContentPane().removeAll();
-
         this.mainFrame.setTitle("2DFA - " + file.getName());
         this.textArea.setText(machine.toString());
         this.menuInput.setVisible(true);
@@ -296,6 +288,12 @@ public class View {
 
     }
 
+    /**
+     * Formats the current input string based on what symbol is currently being read
+     * @param inputString the string being formatted
+     * @param index the current position of the read head
+     * @return the formatted string in HTML format
+     */
     private String formatStringAtIndex(String inputString, int index) {
         if (index < 0 || index >= inputString.length()) {
             throw new IllegalArgumentException("Invalid index");

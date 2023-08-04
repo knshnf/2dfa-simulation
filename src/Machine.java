@@ -4,6 +4,10 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Machine class represents a two-way accepter machine.
+ * It has the properties of a 2DFA machine by Dexter Kozen.
+ */
 public class Machine {
     List<State> states;
     List<Character> inputAlphabet;
@@ -12,7 +16,11 @@ public class Machine {
     State rejectState;
     int readHead;
 
-
+    /**
+     * Creates a new instance of Machine. This constructor initializes the properties of the machine according the
+     * file inputted by the user.
+     * @param file is the machine definition file. Assume that the file is valid.
+     */
     public Machine(File file) throws CustomException{
         // Initialize Reader
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -88,15 +96,16 @@ public class Machine {
             rejectState.setRejectState(true);
             this.rejectState = rejectState;
 
-//            System.out.println("Start state: \n" + startState.getName());
-//            System.out.println("Accept state: \n" + acceptState.getName());
-//            System.out.println("Reject state: \n" + rejectState.getName());
-
         } catch (Exception e) {
             throw new CustomException("Invalid file: " + e);
         }
     }
 
+    /**
+     * Returns true if a string is accepted by the machine, otherwise false.
+     * @param input is input string that will be fed to the machine.
+     * @return true if a string is accepted by the machine, otherwise false.
+     */
     public boolean fastRun(String input){
         StringBuilder sb = new StringBuilder();
         sb.append("<");
@@ -118,10 +127,6 @@ public class Machine {
                 return false;
             }
             else{
-//                System.out.println("Current State: " + currentState.getName());
-//                System.out.println("Current Input: " + input.charAt(readHead));
-//                System.out.println();
-
                 StateAndSymbolPair transition = currentState.getTransition(input.charAt(readHead));
                 currentState = transition.getState();
 
@@ -135,6 +140,11 @@ public class Machine {
         }
     }
 
+    /**
+     * Returns a list containing the configurations entered by the machine on an input string.
+     * @param input is input string that will be fed to the machine.
+     * @return a list containing the configurations entered by the machine on an input string.
+     */
     public List<StateAndIndexPair> step(String input){
         List<StateAndIndexPair> list = new ArrayList<StateAndIndexPair>();
 
@@ -152,18 +162,12 @@ public class Machine {
             list.add(new StateAndIndexPair(currentState.getName(), readHead));
 
             if(currentState.isAcceptState()){
-                System.out.println("Accepted");
                 return list;
             }
             else if(currentState.isRejectState()){
-                System.out.println("Rejected");
                 return list;
             }
             else{
-//                System.out.println("Current State: " + currentState.getName());
-//                System.out.println("Current Input: " + input.charAt(readHead));
-//                System.out.println();
-
                 StateAndSymbolPair transition = currentState.getTransition(input.charAt(readHead));
                 currentState = transition.getState();
 
@@ -177,7 +181,6 @@ public class Machine {
         }
     }
 
-    // This will only be used for debugging
     public String toString(){
             StringBuilder sb = new StringBuilder();
             sb.append("Q = ").append(states).append("\n");
