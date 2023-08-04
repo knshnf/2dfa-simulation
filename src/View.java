@@ -8,7 +8,7 @@ import java.util.List;
 
 
 /**
- * The View class is repsonsible for for displaying GUI of the application.
+ * The View class is repsonsible for displaying GUI of the application.
  */
 public class View {
     private JFrame mainFrame;
