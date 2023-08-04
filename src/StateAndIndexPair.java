@@ -1,4 +1,12 @@
 /**
+ *  STALGCM Term 3 AY 2022 - 2023
+ *  DIGNO, Kenneth Clark
+ *  FETALVERO, Kenshin
+ *  LIOBING, Aldwin
+ *  S14
+ */
+
+/**
  * The StateAndIndexPair class represents a combination of a State and an index in the context
  * of a finite automaton. It is used to keep track of all the states that the machine went through.
  */

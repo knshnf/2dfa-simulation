@@ -1,3 +1,10 @@
+/**
+ *  STALGCM Term 3 AY 2022 - 2023
+ *  DIGNO, Kenneth Clark
+ *  FETALVERO, Kenshin
+ *  LIOBING, Aldwin
+ *  S14
+ */
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
