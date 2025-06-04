@@ -268,7 +268,7 @@
               "hasOpenThreats": false,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
-              "isWebApplication": false,
+              "isWebApplication": true,
               "privilegeLevel": "",
               "threats": []
             }
@@ -1127,7 +1127,7 @@
               "reasonOutOfScope": "",
               "hasOpenThreats": false,
               "handlesCardPayment": false,
-              "handlesGoodsOrServices": false,
+              "handlesGoodsOrServices": true,
               "isWebApplication": false,
               "privilegeLevel": "",
               "threats": []
@@ -1682,6 +1682,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 18,
             "ports": {
               "groups": {
                 "top": {
@@ -1765,7 +1766,6 @@
               ]
             },
             "id": "a429970e-9a53-43d5-a99d-bb90a27e601f",
-            "zIndex": 18,
             "data": {
               "type": "tm.Process",
               "name": "CSV \nReader",
